@@ -17,6 +17,8 @@ import { INITIAL_EVENTS, createEventId } from '../events';
   styleUrls: ['./full-calendar.component.scss'],
 })
 export class FullCalendarComponent {
+  showFiller = false;
+  dateClicked = false;
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
@@ -26,7 +28,7 @@ export class FullCalendarComponent {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    initialEvents: INITIAL_EVENTS,
     weekends: true,
     editable: true,
     selectable: true,
@@ -55,6 +57,7 @@ export class FullCalendarComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
+    this.dateClicked = true;
     const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
 

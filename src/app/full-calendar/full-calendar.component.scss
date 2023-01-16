@@ -1,45 +1,29 @@
 $font-family_1: Arial, Helvetica Neue, Helvetica, sans-serif;
 
-h2 {
-    margin: 0;
-    font-size: 16px;
+
+// mat-sidebar
+.app-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-ul {
-    margin: 0;
-    padding: 0 0 0 1.5em;
-}
-
-li {
-    margin: 1.5em 0;
-    padding: 0;
-}
-
-b {
-    margin-right: 3px;
-}
-
-.demo-app {
+.app-sidenav-content {
     display: flex;
-    min-height: 100%;
-    font-family: $font-family_1;
-    font-size: 14px;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
-.demo-app-sidebar {
-    width: 300px;
-    line-height: 1.5;
-    background: #eaf9ff;
-    border-right: 1px solid #d3e2e8;
+.app-sidenav {
+    padding: 20px;
+    max-width: 400px;
 }
 
-.demo-app-sidebar-section {
-    padding: 2em;
-}
-
-.demo-app-main {
-    flex-grow: 1;
-    padding: 3em;
+.app-main {
+    height: 100%;
+    width: 100%;
 }
 
 .fc {

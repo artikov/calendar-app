@@ -1,45 +1,56 @@
-<p>full-calendar works!</p>
-<div class='demo-app'>
 
-    <div class='demo-app-sidebar'>
-        <div class='demo-app-sidebar-section'>
-            <h2>Instructions</h2>
-            <ul>
-                <li>Select dates and you will be prompted to create a new event</li>
-                <li>Drag, drop, and resize events</li>
-                <li>Click an event to delete it</li>
-            </ul>
+    <mat-drawer-container class="app-container" autosize>
+        <mat-drawer #drawer class="app-sidenav" mode="side">
+            <div class='calendar-app-sidebar'>
+                <div class='calendar-app-sidebar-section'>
+                    <label>
+                        <input type='checkbox' [checked]='calendarVisible' (change)='handleCalendarToggle()' />
+                        toggle whole calendar
+                    </label>
+                </div>
+                <div class='calendar-app-sidebar-section'>
+                    <label>
+                        <input type='checkbox' [checked]='calendarOptions.weekends' (change)='handleWeekendsToggle()' />
+                        toggle weekends
+                    </label>
+                </div>
+                <div class='calendar-app-sidebar-section'>
+                    <h2>All Events ({{currentEvents.length}})</h2>
+                    <ul>
+                        <li *ngFor='let event of currentEvents'>
+                            <b>{{event.startStr}}</b>
+                            <i>{{event.title}}</i>
+                        </li>
+                    </ul>
+                </div>
+                <div class='calendar-app-sidebar-section'>
+                    <h2>Instructions</h2>
+                    <ul>
+                        <li>Select dates and you will be prompted to create a new all-day event</li>
+                        <li>Select dates in week or day view to create custom event with dates</li>
+                        <li>Drag, drop, and resize events</li>
+                        <li>Click an event to delete it</li>
+                    </ul>
+                </div>
         </div>
-        <div class='demo-app-sidebar-section'>
-            <label>
-                <input type='checkbox' [checked]='calendarVisible' (change)='handleCalendarToggle()' />
-                toggle whole calendar
-            </label>
+    </mat-drawer>
+    <div class="app-sidenav-content">
+        <div>
+            <button type="button" mat-button (click)="drawer.toggle()">
+                Toggle sidenav
+            </button>
         </div>
-        <div class='demo-app-sidebar-section'>
-            <label>
-                <input type='checkbox' [checked]='calendarOptions.weekends' (change)='handleWeekendsToggle()' />
-                toggle weekends
-            </label>
+
+        <div class='app-main'>
+            <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+                <ng-template #eventContent let-arg>
+                        <b>{{ arg.timeText }}</b>
+                        <i>{{ arg.event.title }}</i>
+                </ng-template>
+            </full-calendar>
         </div>
-        <div class='demo-app-sidebar-section'>
-            <h2>All Events ({{currentEvents.length}})</h2>
-            <ul>
-                <li *ngFor='let event of currentEvents'>
-                    <b>{{event.startStr}}</b>
-                    <i>{{event.title}}</i>
-                </li>
-            </ul>
-        </div>
+<!-- 
+        <app-calendar-form *ngIf="dateClicked">
+        </app-calendar-form> -->
     </div>
-
-    <div class='demo-app-main'>
-        <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
-            <ng-template #eventContent let-arg>
-                <b>{{ arg.timeText }}</b>
-                <i>{{ arg.event.title }}</i>
-            </ng-template>
-        </full-calendar>
-    </div>
-
-</div>
+    </mat-drawer-container>
